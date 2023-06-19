@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class ButtonSelection : MonoBehaviour
 {
-	private const float defaultSelectionTime = 0.5f;
+	private const float defaultSelectionTime = 2.0f;
 
 	public TMP_InputField inputField;
 	public TextMeshProUGUI textField;
@@ -45,7 +45,7 @@ public class ButtonSelection : MonoBehaviour
 	private void Start()
 	{
 		// Initialize the starting selected button from sentences
-		selectedButton = buttons[13];
+		selectedButton = buttons[0];
 
 		// Display the first sentence in the text field
 		textField.text = sentences[currentSentenceIndex];
@@ -61,97 +61,25 @@ public class ButtonSelection : MonoBehaviour
 
 	private void Update()
 	{
-
-
-
-		// Check mouse movement direction
-		MouseMovement();
-
+		// Selections from different buttons
+		SelectionfromA();
+		SelectionfromB();
+		SelectionfromC();
+		SelectionfromD();
+		SelectionfromE();
+		SelectionfromF();
+		SelectionfromG();
+		SelectionfromH();
+		SelectionfromI();
+		SelectionfromJ();
+		SelectionfromK();
+		SelectionfromL();
+		SelectionfromM();
+		SelectionfromN();
 		// Change the color of the selected button
 		ChangeButtonColor(selectedButton);
 
 	}
-
-
-
-	// Helper methods to calculate the new selected button based on layout
-	public GameObject GetButtonOnRight(GameObject currentButton)
-	{
-		int currentIndex = System.Array.IndexOf(buttons, currentButton);
-		int nextIndex = currentIndex + 1;
-
-		// Check if it's at the rightmost button
-		if (nextIndex % columnSize == 0)
-			nextIndex -= columnSize;
-
-		return buttons[nextIndex];
-	}
-
-	public GameObject GetButtonOnLeft(GameObject currentButton)
-	{
-		int currentIndex = System.Array.IndexOf(buttons, currentButton);
-		int prevIndex = currentIndex - 1;
-
-		// Check if it's at the leftmost button
-		if (currentIndex % columnSize == 0)
-			prevIndex += columnSize;
-
-		return buttons[prevIndex];
-	}
-
-	public GameObject GetButtonAbove(GameObject currentButton)
-	{
-		int currentIndex = System.Array.IndexOf(buttons, currentButton);
-		int aboveIndex = currentIndex - columnSize;
-
-		// Check if it's at the topmost button
-		if (aboveIndex < 0)
-			aboveIndex += buttons.Length;
-
-		return buttons[aboveIndex];
-	}
-
-	public GameObject GetButtonBelow(GameObject currentButton)
-	{
-		int currentIndex = System.Array.IndexOf(buttons, currentButton);
-		int belowIndex = currentIndex + columnSize;
-
-		// Check if it's at the bottommost button
-		if (belowIndex >= buttons.Length)
-			belowIndex -= buttons.Length;
-
-		return buttons[belowIndex];
-	}
-
-	public GameObject GetButtonTopRight(GameObject currentButton)
-	{
-		GameObject buttonOnRight = GetButtonOnRight(currentButton);
-		return GetButtonAbove(buttonOnRight);
-	}
-
-	public GameObject GetButtonTopLeft(GameObject currentButton)
-	{
-		GameObject buttonOnLeft = GetButtonOnLeft(currentButton);
-		return GetButtonAbove(buttonOnLeft);
-	}
-
-	public GameObject GetButtonBottomRight(GameObject currentButton)
-	{
-		GameObject buttonOnRight = GetButtonOnRight(currentButton);
-		return GetButtonBelow(buttonOnRight);
-	}
-
-	public GameObject GetButtonBottomLeft(GameObject currentButton)
-	{
-		GameObject buttonOnLeft = GetButtonOnLeft(currentButton);
-		return GetButtonBelow(buttonOnLeft);
-	}
-
-
-
-
-
-
 
 
 
@@ -420,259 +348,709 @@ public class ButtonSelection : MonoBehaviour
 	}
 
 
-	// Check mouse movement direction
-	public void MouseMovement()
+	// Selection for neighbours of a
+	public void SelectionfromA()
 	{
 		// Update the selection cooldown
 		lastSelectionTime -= Time.deltaTime;
 
-
 		// Check if enough time has passed since the last selection change
-		if (lastSelectionTime <= 0) {
-			float inputX = Input.GetAxis ("Mouse X");
-			float inputY = Input.GetAxis ("Mouse Y");
-
-			if (Mathf.Abs (inputX) > Mathf.Abs (inputY)) {
-				if ( inputX > 0) {
-					selectedButton = GetButtonOnRight (selectedButton);
-					lastSelectionTime = defaultSelectionTime; // Reset the selection cooldown
-					//Debug.Log ("Value of X is: " + inputX);
-				} else if (inputX < 0) {
-					selectedButton = GetButtonOnLeft (selectedButton);
-					lastSelectionTime = defaultSelectionTime; // Reset the selection cooldown
-				}
-				} 
-
-			else {
-				if (inputY > 0) {
-					selectedButton = GetButtonAbove (selectedButton);
-					lastSelectionTime = defaultSelectionTime; // Reset the selection cooldown
-				} 
-				else if (inputY < 0) {
-					selectedButton = GetButtonBelow (selectedButton);
-					lastSelectionTime = defaultSelectionTime; // Reset the selection cooldown
-				}
-			}
-
-			if (inputX > 0 && inputY > 0) {
-				selectedButton = GetButtonTopRight (selectedButton);
-				lastSelectionTime = defaultSelectionTime; // Reset the selection cooldown
-			} 
-
-			else if (inputX < 0 && inputY > 0) {
-				selectedButton = GetButtonTopLeft (selectedButton);
-				lastSelectionTime = defaultSelectionTime; // Reset the selection cooldown
-			} 
-
-			else if (inputX > 0 && inputY < 0) {
-				selectedButton = GetButtonBottomRight (selectedButton);
-				lastSelectionTime = defaultSelectionTime; // Reset the selection cooldown
-			}
-			else if (inputX < 0 && inputY < 0) {
-				selectedButton = GetButtonBottomLeft (selectedButton);
-				lastSelectionTime = defaultSelectionTime; // Reset the selection cooldown
-			} 
-
-		} 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		/*
-		// Update the selection cooldown
-		lastSelectionTime -= Time.deltaTime;
-
-
-		// Check if enough time has passed since the last selection change
-		if (lastSelectionTime <= 0) {
-			// Get Trackball movement input
+		if (lastSelectionTime <= 0)
+		{
+			
 			float mouseX = Input.GetAxis ("Mouse X");
 			float mouseY = Input.GetAxis ("Mouse Y");
 
-			// Check mouse movement direction
-			if (mouseX > 0 && Mathf.Abs(mouseX) > 0.01f)
-			{
-				// Move to the button on the right
-				selectedButton = GetButtonOnRight(selectedButton);
-				lastSelectionTime = defaultSelectionTime; // Reset the selection cooldown
-			}
-			else if (mouseX < 0 && Mathf.Abs(mouseX) > 0.01f)
-			{
-				// Move to the button on the left
-				selectedButton = GetButtonOnLeft(selectedButton);
-				lastSelectionTime=defaultSelectionTime; 
-			}
-
-			else if (mouseY > 0 && Mathf.Abs(mouseY) > 0.01f)
-			{
-				// Move to the button above
-				selectedButton = GetButtonAbove(selectedButton);
-				lastSelectionTime=defaultSelectionTime;
-			}
-			else if (mouseY < 0 && Mathf.Abs(mouseY) > 0.01f)
-			{
-				// Move to the button below
-				selectedButton = GetButtonBelow(selectedButton);
-				lastSelectionTime=defaultSelectionTime; 
-			}
-
-
-
-
-
-			// Check mouse movement direction
-			if (mouseX  >= -6 && Mathf.Abs (mouseX) > 0.01f) {
-				// Move to the button on the left
-				selectedButton = buttons [1];
-				lastSelectionTime = defaultSelectionTime; 
-			}
-			else if (mouseX  >= 6 && Mathf.Abs (mouseX) > 0.01f) {
-				// Move to the button on the right
-				selectedButton = buttons [4];
-				lastSelectionTime = defaultSelectionTime; 
-			}
-			else if (mouseY  >= 6 && Mathf.Abs (mouseY) > 0.01f) {
-				// Move to the button on the 
-				selectedButton = buttons [2];
-				lastSelectionTime = defaultSelectionTime; 
-			}
-			else if (mouseY  >= -6 && Mathf.Abs (mouseY) > 0.01f) {
-				// Move to the button on the 
-				selectedButton = buttons [5];
-				lastSelectionTime = defaultSelectionTime; 
-			}
-			*/
-
-
-
-
-
-
-
-			/*
-			// Check mouse movement direction
-			if (mouseX > 0 && Mathf.Abs (mouseX) > 0.01f) {
-				// Move to the button on the right
-				selectedButton = buttons [4];
-				lastSelectionTime = defaultSelectionTime; 
-			} else if (mouseX < 0 && Mathf.Abs (mouseX) > 0.01f) {
-				// Move to the button on the left
-				selectedButton = buttons [1];
-				lastSelectionTime = defaultSelectionTime; 
-			} else if (mouseY > 0 && Mathf.Abs (mouseY) > 0.01f) {
-				// Move to the button above
-				selectedButton = buttons [3];
-				lastSelectionTime = defaultSelectionTime;
-			} else if (mouseY < 0 && Mathf.Abs (mouseY) > 0.01f) {
-				// Move to the button below
-				selectedButton = buttons [5];
-				lastSelectionTime = defaultSelectionTime; 
-			}
-
-
-
 			// Calculate the angle of the trackball input
-			float angle = Mathf.Atan2(mouseX, mouseY) * Mathf.Rad2Deg;
-
+			float angle = Mathf.Atan2(mouseY, mouseX) * Mathf.Rad2Deg;
 			if (angle < 0)
 				angle += 360;
 			Debug.Log ("Current angle is " + angle);
 
-
-
-			if (angle > 0 && angle < 50  )
+		if (selectedButton == buttons[0])
+		{
+			if (angle > 0 && angle < 90) 
 			{
-				selectedButton = buttons[1];
-				//lastSelectionTime = defaultSelectionTime; // Reset the selection cooldown
-				Debug.Log ("Current angle is " + angle);
-			}
-			else if (angle > 50 &&  angle < 90)
-			{
-				selectedButton = buttons[2];
-				//lastSelectionTime = defaultSelectionTime; // Reset the selection cooldown
-				Debug.Log ("Current angle is " + angle);
-			}
-			else if (angle > 90 && angle < 150)
-			{
-				selectedButton = buttons[3];
-				//lastSelectionTime = defaultSelectionTime; // Reset the selection cooldown
-				Debug.Log ("Current angle is " + angle);
-			}
-			else if (angle > 150 && angle < 200)
-			{
-				selectedButton = buttons[4];
-				//lastSelectionTime = defaultSelectionTime; // Reset the selection cooldown
-				Debug.Log ("Current angle is " + angle);
-			}
-			else if (angle > 200 && angle < 260)
-			{
-				selectedButton = buttons[5];
-				//lastSelectionTime = defaultSelectionTime; // Reset the selection cooldown
-				Debug.Log ("Current angle is " + angle);
-			}
-
-
-			// Check mouse movement direction
-			if (mouseX > 0 && Mathf.Abs(mouseX) > 0.01f)
-			{
-				// Move to the button on the right
-				selectedButton = GetButtonOnRight(selectedButton);
+				selectedButton = buttons [3];
 				lastSelectionTime = defaultSelectionTime; // Reset the selection cooldown
 			}
-			else if (mouseX < 0 && Mathf.Abs(mouseX) > 0.01f)
+			else if (angle > 90 &&  angle < 155)
 			{
-				// Move to the button on the left
-				selectedButton = GetButtonOnLeft(selectedButton);
-				lastSelectionTime=defaultSelectionTime; 
+				selectedButton = buttons[2];
+				lastSelectionTime = defaultSelectionTime;
 			}
-
-			else if (mouseY > 0 && Mathf.Abs(mouseY) > 0.01f)
+			else if (angle > 155 &&  angle < 215)
 			{
-				// Move to the button above
-				selectedButton = GetButtonAbove(selectedButton);
-				lastSelectionTime=defaultSelectionTime;
+				selectedButton = buttons[1];
+				lastSelectionTime = defaultSelectionTime;
 			}
-			else if (mouseY < 0 && Mathf.Abs(mouseY) > 0.01f)
+			else if (angle > 215 &&  angle < 310)
 			{
-				// Move to the button below
-				selectedButton = GetButtonBelow(selectedButton);
-				lastSelectionTime=defaultSelectionTime; 
+				selectedButton = buttons[5];
+				lastSelectionTime = defaultSelectionTime;
 			}
-		}*/
+			else if (angle > 310 &&  angle < 360)
+			{
+				selectedButton = buttons[4];
+				lastSelectionTime = defaultSelectionTime;
+			}
+		}
+	}
 	}
 
-}
+
+	// Selection for neighbours of b
+	public void SelectionfromB()
+	{
+		// Update the selection cooldown
+		lastSelectionTime -= Time.deltaTime;
+
+		// Check if enough time has passed since the last selection change
+		if (lastSelectionTime <= 0) {
+			
+			float mouseX = Input.GetAxis ("Mouse X");
+			float mouseY = Input.GetAxis ("Mouse Y");
+
+			// Calculate the angle of the trackball input
+			float angle = Mathf.Atan2 (mouseY, mouseX) * Mathf.Rad2Deg;
+
+			if (angle < 0)
+				angle += 360;
+
+
+			if (selectedButton == buttons [1])
+			{
+				if (angle > 0 && angle < 40)
+				{
+					selectedButton = buttons [0];
+					lastSelectionTime = defaultSelectionTime; // Reset the selection cooldown
+				} 
+				else if (angle > 40 && angle < 90)
+				{
+					selectedButton = buttons [2];
+					lastSelectionTime = defaultSelectionTime;
+				} 
+				else if (angle > 90 && angle < 140)
+				{
+					selectedButton = buttons [9];
+					lastSelectionTime = defaultSelectionTime;
+				} 
+				else if (angle > 140 && angle < 200)
+				{
+					selectedButton = buttons [8];
+					lastSelectionTime = defaultSelectionTime;
+				} 
+				else if (angle > 200 && angle < 280) 
+				{
+					selectedButton = buttons [7];
+					lastSelectionTime = defaultSelectionTime;
+				} 
+				else if (angle > 280 && angle < 360)
+				{
+					selectedButton = buttons [5];
+					lastSelectionTime = defaultSelectionTime;
+				}
+			}
+		}
+	}
+
+
+
+
+	// Selection for neighbours of c
+	public void SelectionfromC()
+	{
+		// Update the selection cooldown
+		lastSelectionTime -= Time.deltaTime;
+
+		// Check if enough time has passed since the last selection change
+		if (lastSelectionTime <= 0)
+		{
+
+			float mouseX = Input.GetAxis ("Mouse X");
+			float mouseY = Input.GetAxis ("Mouse Y");
+
+			// Calculate the angle of the trackball input
+			float angle = Mathf.Atan2(mouseY, mouseX) * Mathf.Rad2Deg;
+			if (angle < 0)
+				angle += 360;
+
+			if (selectedButton == buttons[2])
+			{
+				if (angle > 0 && angle < 50) 
+				{
+					selectedButton = buttons [3];
+					lastSelectionTime = defaultSelectionTime; // Reset the selection cooldown
+				}
+				else if (angle > 50 &&  angle < 110)
+				{
+					selectedButton = buttons[10];
+					lastSelectionTime = defaultSelectionTime;
+				}
+				else if (angle > 110 &&  angle < 180)
+				{
+					selectedButton = buttons[9];
+					lastSelectionTime = defaultSelectionTime;
+				}
+				else if (angle > 180 &&  angle < 270)
+				{
+					selectedButton = buttons[1];
+					lastSelectionTime = defaultSelectionTime;
+				}
+				else if (angle > 270 &&  angle < 360)
+				{
+					selectedButton = buttons[0];
+					lastSelectionTime = defaultSelectionTime;
+				}
+			}
+		}
+	}
+
+
+
+
+	// Selection for neighbours of d
+	public void SelectionfromD()
+	{
+		// Update the selection cooldown
+		lastSelectionTime -= Time.deltaTime;
+
+		// Check if enough time has passed since the last selection change
+		if (lastSelectionTime <= 0)
+		{
+
+			float mouseX = Input.GetAxis ("Mouse X");
+			float mouseY = Input.GetAxis ("Mouse Y");
+
+			// Calculate the angle of the trackball input
+			float angle = Mathf.Atan2(mouseY, mouseX) * Mathf.Rad2Deg;
+			if (angle < 0)
+				angle += 360;
+
+			if (selectedButton == buttons[3])
+			{
+				if (angle > 0 && angle < 65) 
+				{
+					selectedButton = buttons [11];
+					lastSelectionTime = defaultSelectionTime; // Reset the selection cooldown
+				}
+				else if (angle > 65 &&  angle < 140)
+				{
+					selectedButton = buttons[10];
+					lastSelectionTime = defaultSelectionTime;
+				}
+				else if (angle > 140 &&  angle <200 )
+				{
+					selectedButton = buttons[2];
+					lastSelectionTime = defaultSelectionTime;
+				}
+				else if (angle >200  &&  angle < 260)
+				{
+					selectedButton = buttons[0];
+					lastSelectionTime = defaultSelectionTime;
+				}
+				else if (angle > 260 &&  angle < 360)
+				{
+					selectedButton = buttons[4];
+					lastSelectionTime = defaultSelectionTime;
+				}
+			}
+		}
+	}
+
+
+
+
+	// Selection for neighbours of E
+	public void SelectionfromE()
+	{
+		// Update the selection cooldown
+		lastSelectionTime -= Time.deltaTime;
+
+		// Check if enough time has passed since the last selection change
+		if (lastSelectionTime <= 0) {
+
+			float mouseX = Input.GetAxis ("Mouse X");
+			float mouseY = Input.GetAxis ("Mouse Y");
+
+			// Calculate the angle of the trackball input
+			float angle = Mathf.Atan2 (mouseY, mouseX) * Mathf.Rad2Deg;
+
+			if (angle < 0)
+				angle += 360;
+
+
+			if (selectedButton == buttons [4])
+			{
+				if (angle > 0 && angle < 40)
+				{
+					selectedButton = buttons [12];
+					lastSelectionTime = defaultSelectionTime; // Reset the selection cooldown
+				} 
+				else if (angle > 40 && angle < 80)
+				{
+					selectedButton = buttons [11];
+					lastSelectionTime = defaultSelectionTime;
+				} 
+				else if (angle > 80 && angle < 120)
+				{
+					selectedButton = buttons [3];
+					lastSelectionTime = defaultSelectionTime;
+				} 
+				else if (angle > 120 && angle < 180)
+				{
+					selectedButton = buttons [0];
+					lastSelectionTime = defaultSelectionTime;
+				} 
+				else if (angle > 180 && angle < 270) 
+				{
+					selectedButton = buttons [5];
+					lastSelectionTime = defaultSelectionTime;
+				} 
+				else if (angle > 270 && angle < 360)
+				{
+					selectedButton = buttons [13];
+					lastSelectionTime = defaultSelectionTime;
+				}
+			}
+		}
+	}
+
+
+
+
+	// Selection for neighbours of F
+	public void SelectionfromF()
+	{
+		// Update the selection cooldown
+		lastSelectionTime -= Time.deltaTime;
+
+		// Check if enough time has passed since the last selection change
+		if (lastSelectionTime <= 0) {
+
+			float mouseX = Input.GetAxis ("Mouse X");
+			float mouseY = Input.GetAxis ("Mouse Y");
+
+			// Calculate the angle of the trackball input
+			float angle = Mathf.Atan2 (mouseY, mouseX) * Mathf.Rad2Deg;
+
+			if (angle < 0)
+				angle += 360;
+
+
+			if (selectedButton == buttons [5])
+			{
+				if (angle > 0 && angle < 50)
+				{
+					selectedButton = buttons [4];
+					lastSelectionTime = defaultSelectionTime; // Reset the selection cooldown
+				} 
+				else if (angle > 50 && angle < 125)
+				{
+					selectedButton = buttons [0];
+					lastSelectionTime = defaultSelectionTime;
+				} 
+				else if (angle > 125 && angle < 180)
+				{
+					selectedButton = buttons [1];
+					lastSelectionTime = defaultSelectionTime;
+				} 
+				else if (angle > 180 && angle < 230)
+				{
+					selectedButton = buttons [7];
+					lastSelectionTime = defaultSelectionTime;
+				} 
+				else if (angle > 230 && angle < 310) 
+				{
+					selectedButton = buttons [6];
+					lastSelectionTime = defaultSelectionTime;
+				} 
+				else if (angle > 310 && angle < 360)
+				{
+					selectedButton = buttons [13];
+					lastSelectionTime = defaultSelectionTime;
+				}
+			}
+		}
+	}
+
+
+
+	// Selection for neighbours of G
+	public void SelectionfromG()
+	{
+		// Update the selection cooldown
+		lastSelectionTime -= Time.deltaTime;
+
+		// Check if enough time has passed since the last selection change
+		if (lastSelectionTime <= 0) {
+
+			float mouseX = Input.GetAxis ("Mouse X");
+			float mouseY = Input.GetAxis ("Mouse Y");
+
+			// Calculate the angle of the trackball input
+			float angle = Mathf.Atan2 (mouseY, mouseX) * Mathf.Rad2Deg;
+
+			if (angle < 0)
+				angle += 360;
+
+
+			if (selectedButton == buttons [6])
+			{
+				if (angle > 0 && angle < 50)
+				{
+					selectedButton = buttons [13];
+					lastSelectionTime = defaultSelectionTime; // Reset the selection cooldown
+				} 
+				else if (angle > 50 && angle < 130)
+				{
+					selectedButton = buttons [5];
+					lastSelectionTime = defaultSelectionTime;
+				} 
+				else if (angle > 130 && angle < 200)
+				{
+					selectedButton = buttons [7];
+					lastSelectionTime = defaultSelectionTime;
+				} 
+
+			}
+		}
+	}
+
+
+
+
+	// Selection for neighbours of H
+	public void SelectionfromH()
+	{
+		// Update the selection cooldown
+		lastSelectionTime -= Time.deltaTime;
+
+		// Check if enough time has passed since the last selection change
+		if (lastSelectionTime <= 0) {
+
+			float mouseX = Input.GetAxis ("Mouse X");
+			float mouseY = Input.GetAxis ("Mouse Y");
+
+			// Calculate the angle of the trackball input
+			float angle = Mathf.Atan2 (mouseY, mouseX) * Mathf.Rad2Deg;
+
+			if (angle < 0)
+				angle += 360;
+
+
+			if (selectedButton == buttons [7])
+			{
+				if (angle > 0 && angle < 40)
+				{
+					selectedButton = buttons [5];
+					lastSelectionTime = defaultSelectionTime; // Reset the selection cooldown
+				} 
+				else if (angle > 40 && angle < 90)
+				{
+					selectedButton = buttons [1];
+					lastSelectionTime = defaultSelectionTime;
+				} 
+				else if (angle > 90 && angle < 180)
+				{
+					selectedButton = buttons [8];
+					lastSelectionTime = defaultSelectionTime;
+				} 
+				else if (angle > 180 && angle < 360)
+				{
+					selectedButton = buttons [6];
+					lastSelectionTime = defaultSelectionTime;
+				} 
+
+			}
+		}
+	}
+
+
+
+
+	// Selection for neighbours of I
+	public void SelectionfromI()
+	{
+		// Update the selection cooldown
+		lastSelectionTime -= Time.deltaTime;
+
+		// Check if enough time has passed since the last selection change
+		if (lastSelectionTime <= 0) {
+
+			float mouseX = Input.GetAxis ("Mouse X");
+			float mouseY = Input.GetAxis ("Mouse Y");
+
+			// Calculate the angle of the trackball input
+			float angle = Mathf.Atan2 (mouseY, mouseX) * Mathf.Rad2Deg;
+
+			if (angle < 0)
+				angle += 360;
+
+
+			if (selectedButton == buttons [8])
+			{
+				if (angle > 0 && angle < 45)
+				{
+					selectedButton = buttons [1];
+					lastSelectionTime = defaultSelectionTime; // Reset the selection cooldown
+				} 
+				else if (angle > 45 && angle < 90)
+				{
+					selectedButton = buttons [9];
+					lastSelectionTime = defaultSelectionTime;
+				} 
+				else if (angle > 270 && angle < 360)
+				{
+					selectedButton = buttons [7];
+					lastSelectionTime = defaultSelectionTime;
+				} 
+
+			}
+		}
+	}
+
+
+	// Selection for neighbours of J
+	public void SelectionfromJ()
+	{
+		// Update the selection cooldown
+		lastSelectionTime -= Time.deltaTime;
+
+		// Check if enough time has passed since the last selection change
+		if (lastSelectionTime <= 0) {
+
+			float mouseX = Input.GetAxis ("Mouse X");
+			float mouseY = Input.GetAxis ("Mouse Y");
+
+			// Calculate the angle of the trackball input
+			float angle = Mathf.Atan2 (mouseY, mouseX) * Mathf.Rad2Deg;
+
+			if (angle < 0)
+				angle += 360;
+
+
+			if (selectedButton == buttons [9])
+			{
+				if (angle > 0 && angle < 40)
+				{
+					selectedButton = buttons [2];
+					lastSelectionTime = defaultSelectionTime; // Reset the selection cooldown
+				} 
+				else if (angle > 40 && angle < 90)
+				{
+					selectedButton = buttons [10];
+					lastSelectionTime = defaultSelectionTime;
+				} 
+				else if (angle > 90 && angle < 270)
+				{
+					selectedButton = buttons [8];
+					lastSelectionTime = defaultSelectionTime;
+				} 
+				else if (angle > 270 && angle < 360)
+				{
+					selectedButton = buttons [1];
+					lastSelectionTime = defaultSelectionTime;
+				} 
+
+			}
+		}
+	}
+
+
+
+	// Selection for neighbours of K
+	public void SelectionfromK()
+	{
+		// Update the selection cooldown
+		lastSelectionTime -= Time.deltaTime;
+
+		// Check if enough time has passed since the last selection change
+		if (lastSelectionTime <= 0) {
+
+			float mouseX = Input.GetAxis ("Mouse X");
+			float mouseY = Input.GetAxis ("Mouse Y");
+
+			// Calculate the angle of the trackball input
+			float angle = Mathf.Atan2 (mouseY, mouseX) * Mathf.Rad2Deg;
+
+			if (angle < 0)
+				angle += 360;
+
+
+			if (selectedButton == buttons [10])
+			{
+				if (angle > 160 && angle < 225)
+				{
+					selectedButton = buttons [9];
+					lastSelectionTime = defaultSelectionTime; // Reset the selection cooldown
+				} 
+				else if (angle > 225 && angle < 270)
+				{
+					selectedButton = buttons [2];
+					lastSelectionTime = defaultSelectionTime;
+				} 
+				else if (angle > 270 && angle < 315)
+				{
+					selectedButton = buttons [3];
+					lastSelectionTime = defaultSelectionTime;
+				} 
+				else if (angle > 315 && angle < 360)
+				{
+					selectedButton = buttons [11];
+					lastSelectionTime = defaultSelectionTime;
+				} 
+
+			}
+		}
+	}
+
+
+
+	// Selection for neighbours of L
+	public void SelectionfromL()
+	{
+		// Update the selection cooldown
+		lastSelectionTime -= Time.deltaTime;
+
+		// Check if enough time has passed since the last selection change
+		if (lastSelectionTime <= 0) {
+
+			float mouseX = Input.GetAxis ("Mouse X");
+			float mouseY = Input.GetAxis ("Mouse Y");
+
+			// Calculate the angle of the trackball input
+			float angle = Mathf.Atan2 (mouseY, mouseX) * Mathf.Rad2Deg;
+
+			if (angle < 0)
+				angle += 360;
+
+
+			if (selectedButton == buttons[11])
+			{
+				if (angle > 90 && angle < 170)
+				{
+					selectedButton = buttons [10];
+					lastSelectionTime = defaultSelectionTime; // Reset the selection cooldown
+				} 
+				else if (angle > 170 && angle < 270)
+				{
+					selectedButton = buttons [3];
+					lastSelectionTime = defaultSelectionTime;
+				} 
+				else if (angle > 270 && angle < 360)
+				{
+					selectedButton = buttons [12];
+					lastSelectionTime = defaultSelectionTime;
+				} 
+
+
+			}
+		}
+	}
+
+
+
+
+
+	// Selection for neighbours of M
+	public void SelectionfromM()
+	{
+		// Update the selection cooldown
+		lastSelectionTime -= Time.deltaTime;
+
+		// Check if enough time has passed since the last selection change
+		if (lastSelectionTime <= 0) {
+
+			float mouseX = Input.GetAxis ("Mouse X");
+			float mouseY = Input.GetAxis ("Mouse Y");
+
+			// Calculate the angle of the trackball input
+			float angle = Mathf.Atan2 (mouseY, mouseX) * Mathf.Rad2Deg;
+
+			if (angle < 0)
+				angle += 360;
+
+
+			if (selectedButton == buttons[12])
+			{
+				if (angle > 0 && angle < 150)
+				{
+					selectedButton = buttons [11];
+					lastSelectionTime = defaultSelectionTime; // Reset the selection cooldown
+				} 
+				else if (angle > 150 && angle < 210)
+				{
+					selectedButton = buttons [4];
+					lastSelectionTime = defaultSelectionTime;
+				} 
+				else if (angle > 210 && angle < 360)
+				{
+					selectedButton = buttons [13];
+					lastSelectionTime = defaultSelectionTime;
+				} 
+
+
+			}
+		}
+	}
+
+
+
+
+
+	// Selection for neighbours of N
+	public void SelectionfromN()
+	{
+		// Update the selection cooldown
+		lastSelectionTime -= Time.deltaTime;
+
+		// Check if enough time has passed since the last selection change
+		if (lastSelectionTime <= 0) {
+
+			float mouseX = Input.GetAxis ("Mouse X");
+			float mouseY = Input.GetAxis ("Mouse Y");
+
+			// Calculate the angle of the trackball input
+			float angle = Mathf.Atan2 (mouseY, mouseX) * Mathf.Rad2Deg;
+
+			if (angle < 0)
+				angle += 360;
+
+
+			if (selectedButton == buttons[13])
+			{
+				if (angle > 0 && angle < 90)
+				{
+					selectedButton = buttons [12];
+					lastSelectionTime = defaultSelectionTime; // Reset the selection cooldown
+				} 
+				else if (angle > 90 && angle < 145)
+				{
+					selectedButton = buttons [4];
+					lastSelectionTime = defaultSelectionTime;
+				} 
+				else if (angle > 145 && angle < 180)
+				{
+					selectedButton = buttons [5];
+					lastSelectionTime = defaultSelectionTime;
+				}
+				else if (angle > 180 && angle < 360)
+				{
+					selectedButton = buttons [6];
+					lastSelectionTime = defaultSelectionTime;
+				} 
+
+
+			}
+		}
+	}
+
+
+
+
+	}
+	
 
 
 
