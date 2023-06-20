@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class ButtonSelection : MonoBehaviour
 {
-	private const float defaultSelectionTime = 2.0f;
+	private const float defaultSelectionTime = 4.0f;
 
 	public TMP_InputField inputField;
 	public TextMeshProUGUI textField;
@@ -79,6 +79,11 @@ public class ButtonSelection : MonoBehaviour
 		// Change the color of the selected button
 		ChangeButtonColor(selectedButton);
 
+	}
+
+	private void LateUpdate()
+	{
+		ProcessKeyPress();
 	}
 
 
@@ -342,10 +347,7 @@ public class ButtonSelection : MonoBehaviour
 
 
 
-	private void LateUpdate()
-	{
-		ProcessKeyPress();
-	}
+
 
 
 	// Selection for neighbours of a
@@ -365,7 +367,6 @@ public class ButtonSelection : MonoBehaviour
 			float angle = Mathf.Atan2(mouseY, mouseX) * Mathf.Rad2Deg;
 			if (angle < 0)
 				angle += 360;
-			Debug.Log ("Current angle is " + angle);
 
 		if (selectedButton == buttons[0])
 		{
