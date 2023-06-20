@@ -12,11 +12,11 @@ public class ButtonSelection : MonoBehaviour
 
 
 	private string[] sentences = {
-		"my preferred treat is chocolat",
-		"we are subjects and must obey",
-		"there will be some fog tonight",
-		"there will be some fog tonight",
-		"my bank account is overdrawn"
+		"a bad fig jam",
+		"ben can hang a bag",
+		"ann had a mad camel",
+		"ben can bake a cake",
+		"khan feeding an eagle"
 	};
 	// Current sentence index
 	private int currentSentenceIndex = 0;
@@ -25,8 +25,6 @@ public class ButtonSelection : MonoBehaviour
 	private float startTime;
 	private float endTime;
 	private int T;
-
-
 
 
 	// Public variable for button assignment in the Unity editor
@@ -78,6 +76,7 @@ public class ButtonSelection : MonoBehaviour
 		SelectionfromN();
 		// Change the color of the selected button
 		ChangeButtonColor(selectedButton);
+		inputField.ActivateInputField();
 
 	}
 
@@ -150,143 +149,62 @@ public class ButtonSelection : MonoBehaviour
 			startTime = Time.time;
 		}
 
-		if (selectedButton == buttons[0])
+		if (selectedButton == buttons[0] &&  Input.GetKeyDown(KeyCode.I))
 		{
-			if (Input.GetKeyDown(KeyCode.A))
-			{
-				WriteCharacterToInputField('q');
-			}
-			else if (Input.GetKeyDown(KeyCode.E))
-			{
-				WriteCharacterToInputField('w');
-			}
-			else if (Input.GetKeyDown(KeyCode.I))
-			{
-				WriteCharacterToInputField('e');
-			}
-			else if (Input.GetKeyDown(KeyCode.O))
-			{
-				WriteCharacterToInputField('r');
-			}
-			else if (Input.GetKeyDown(KeyCode.U))
-			{
-				WriteCharacterToInputField('t');
-			}
-		}
-		else if (selectedButton == buttons[1])
-		{
-			if (Input.GetKeyDown(KeyCode.A))
-			{
-				WriteCharacterToInputField('y');
-			}
-			else if (Input.GetKeyDown(KeyCode.E))
-			{
-				WriteCharacterToInputField('u');
-			}
-			else if (Input.GetKeyDown(KeyCode.I))
-			{
-				WriteCharacterToInputField('i');
-			}
-			else if (Input.GetKeyDown(KeyCode.O))
-			{
-				WriteCharacterToInputField('o');
-			}
-			else if (Input.GetKeyDown(KeyCode.U))
-			{
-				WriteCharacterToInputField('p');
-			}
-		}
-		else if (selectedButton == buttons[2])
-		{
-			if (Input.GetKeyDown(KeyCode.A))
-			{
 				WriteCharacterToInputField('a');
-			}
-			else if (Input.GetKeyDown(KeyCode.E))
-			{
-				WriteCharacterToInputField('s');
-			}
-			else if (Input.GetKeyDown(KeyCode.I))
-			{
-				WriteCharacterToInputField('d');
-			}
-			else if (Input.GetKeyDown(KeyCode.O))
-			{
-				WriteCharacterToInputField('f');
-			}
-			else if (Input.GetKeyDown(KeyCode.U))
-			{
-				WriteCharacterToInputField('g');
-			}
 		}
-		else if (selectedButton == buttons[3])
+		else if (selectedButton == buttons[1] && Input.GetKeyDown(KeyCode.I))
 		{
-			if (Input.GetKeyDown(KeyCode.A))
-			{
-				WriteCharacterToInputField('h');
-			}
-			else if (Input.GetKeyDown(KeyCode.E))
-			{
-				WriteCharacterToInputField('j');
-			}
-			else if (Input.GetKeyDown(KeyCode.I))
-			{
-				WriteCharacterToInputField('k');
-			}
-			else if (Input.GetKeyDown(KeyCode.O))
-			{
-				WriteCharacterToInputField('l');
-			}
-			else if (Input.GetKeyDown(KeyCode.U))
-			{
-				WriteCharacterToInputField('.');
-			}
+			WriteCharacterToInputField('b');
 		}
-		else if (selectedButton == buttons[4])
+		else if (selectedButton == buttons[2] && Input.GetKeyDown(KeyCode.I))
 		{
-			if (Input.GetKeyDown(KeyCode.A))
-			{
-				WriteCharacterToInputField('z');
-			}
-			else if (Input.GetKeyDown(KeyCode.E))
-			{
-				WriteCharacterToInputField('x');
-			}
-			else if (Input.GetKeyDown(KeyCode.I))
-			{
-				WriteCharacterToInputField('c');
-			}
-			else if (Input.GetKeyDown(KeyCode.O))
-			{
-				WriteCharacterToInputField('v');
-			}
-			else if (Input.GetKeyDown(KeyCode.U))
-			{
-				WriteCharacterToInputField('b');
-			}
+			WriteCharacterToInputField('c');
 		}
-		else if (selectedButton == buttons[5])
+		else if (selectedButton == buttons[3] && Input.GetKeyDown(KeyCode.I))
 		{
-			if (Input.GetKeyDown(KeyCode.A))
-			{
-				WriteCharacterToInputField('n');
-			}
-			else if (Input.GetKeyDown(KeyCode.E))
-			{
-				WriteCharacterToInputField('m');
-			}
-			else if (Input.GetKeyDown(KeyCode.I))
-			{
-				WriteCharacterToInputField(',');
-			}
-			else if (Input.GetKeyDown(KeyCode.O))
-			{
-				WriteCharacterToInputField('.');
-			}
-			else if (Input.GetKeyDown(KeyCode.U))
-			{
-				WriteCharacterToInputField('/');
-			}
+			WriteCharacterToInputField('d');
+		}
+		else if (selectedButton == buttons[4] && Input.GetKeyDown(KeyCode.I))
+		{
+			WriteCharacterToInputField('e');
+		}
+		else if (selectedButton == buttons[5] && Input.GetKeyDown(KeyCode.I))
+		{
+			WriteCharacterToInputField('f');
+		}
+		else if (selectedButton == buttons[6] && Input.GetKeyDown(KeyCode.I))
+		{
+			WriteCharacterToInputField('g');
+		}
+		else if (selectedButton == buttons[7] && Input.GetKeyDown(KeyCode.I))
+		{
+			WriteCharacterToInputField('h');
+		}
+		else if (selectedButton == buttons[8] && Input.GetKeyDown(KeyCode.I))
+		{
+			WriteCharacterToInputField('i');
+		}
+
+		else if (selectedButton == buttons[9] && Input.GetKeyDown(KeyCode.I))
+		{
+			WriteCharacterToInputField('j');
+		}
+		else if (selectedButton == buttons[10] && Input.GetKeyDown(KeyCode.I))
+		{
+			WriteCharacterToInputField('k');
+		}
+		else if (selectedButton == buttons[11] && Input.GetKeyDown(KeyCode.I))
+		{
+			WriteCharacterToInputField('l');
+		}
+		else if (selectedButton == buttons[12] && Input.GetKeyDown(KeyCode.I))
+		{
+			WriteCharacterToInputField('m');
+		}
+		else if (selectedButton == buttons[13] && Input.GetKeyDown(KeyCode.I))
+		{
+			WriteCharacterToInputField('n');
 		}
 
 		// Handle backspace key
